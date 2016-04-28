@@ -41,9 +41,13 @@
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-plugin-react": "^5.0.1",
+    "flexboxgrid": "^6.3.0",
     "flux": "^2.1.1",
     "gulp-eslint": "^2.0.0",
+    "material-ui": "^0.14.4",
     "object-assign": "^4.0.1",
-    "react": "^0.13.3"
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-tap-event-plugin": "^1.0.0"
   }
 }

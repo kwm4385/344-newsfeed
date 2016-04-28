@@ -1,6 +1,6 @@
-import {Dispatcher} from 'flux';
-import Constants from './Constants';
-import assign from 'object-assign';
+import { Dispatcher } from 'flux'
+import assign  from 'object-assign'
+import Constants  from './Constants'
 
 /**
  * Purpose: to create a single dispatcher instance for use throughout the
