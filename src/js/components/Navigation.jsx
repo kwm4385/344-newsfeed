@@ -1,5 +1,6 @@
-import { AppBar, LeftNav, IconButton, IconMenu, MenuItem } from 'material-ui'
-import MoreVertIcon  from 'material-ui/lib/svg-icons/navigation/more-vert'
+import { AppBar, LeftNav, MenuItem } from 'material-ui'
+import FontIcon  from 'material-ui/lib/font-icon'
+import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
 import React  from 'react'
 
@@ -7,7 +8,7 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      open: false
+      open: true
     };
   },
 
@@ -36,25 +37,18 @@ export default React.createClass({
         <AppBar
           title="News Feed"
           onLeftIconButtonTouchTap={this.toggleMenu}
-          // iconElementRight={
-          //   <IconMenu
-          //     iconButtonElement={
-          //       <IconButton><MoreVertIcon /></IconButton>
-          //     }
-          //     targetOrigin={{horizontal: 'right', vertical: 'top'}}
-          //     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-          //   >
-          //     <MenuItem primaryText="Log in" />
-          //   </IconMenu>
-          // }
         />
         <LeftNav
           open={this.state.open}
-          style={{'top': '64px'}}>
+          style={{'top': '64px', height:'calc(100% - 64px)'}}>
           <div className="nav-userbox">
             <p className="bottom">{this.renderLastVisit()}</p>
           </div>
-          <MenuItem>Menu Item 2</MenuItem>
+          <MenuItem>
+            <FontIcon className="material-icons menu-icon" color={Colors.grey800}>favorite</FontIcon>
+            Favorites
+          </MenuItem>
+          <MenuItem>Sign In</MenuItem>
         </LeftNav>
       </div>
     );
