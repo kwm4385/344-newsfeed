@@ -34,6 +34,10 @@ module.exports = {
     src: 'src/index.html',
     dest: dest
   },
+  php: {
+    src: 'src/php/**/*.php',
+    dest: dest
+  },
   watch: {
     src: 'src/**/*.*',
     tasks: ['build']

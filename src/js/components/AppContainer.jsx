@@ -1,43 +1,28 @@
-import React from 'react';
-import TodoStore from '../stores/TodoStore';
-import ActionCreator from '../actions/TodoActionCreators';
-import App from './App.jsx';
+import ThemeManager  from 'material-ui/lib/styles/theme-manager'
+import React  from 'react'
+import Theme  from '../Theme.js'
+import UserActions  from '../actions/UserActions.js'
+import App  from './App.jsx'
 
 export default React.createClass({
-  _onChange() {
-    this.setState(TodoStore.getAll());
-  },
-
-  getInitialState() {
-    return TodoStore.getAll();
-  },
 
   componentDidMount() {
-    TodoStore.addChangeListener(this._onChange);
+    UserActions.updateLastVisit();
   },
 
-  componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
+  childContextTypes : {
+    muiTheme: React.PropTypes.object,
   },
 
-  handleAddTask(e) {
-    let title = prompt('Enter task title:');
-    if (title) {
-      ActionCreator.addItem(title);
-    }
-  },
-
-  handleClear(e) {
-    ActionCreator.clearList();
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getMuiTheme(Theme),
+    };
   },
 
   render() {
-    let {tasks} = this.state;
     return (
-      <App
-        onAddTask={this.handleAddTask}
-        onClear={this.handleClear}
-        tasks={tasks} />
+      <App/>
     );
   }
 });

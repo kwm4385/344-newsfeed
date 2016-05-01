@@ -1,29 +1,47 @@
-import RaisedButton  from 'material-ui/lib/raised-button'
-import React, { PropTypes } from 'react'
-import TaskList  from './TaskList.jsx'
+import moment  from 'moment'
+import React  from 'react'
+import FeedActions  from '../actions/FeedActions.js'
+import UserStore  from '../stores/UserStore.js'
+import Navigation  from './Navigation.jsx'
 
 export default React.createClass({
-  propTypes: {
-    tasks: PropTypes.array.isRequired,
-    onAddTask: PropTypes.func.isRequired,
-    onClear: PropTypes.func.isRequired
+
+  _onChange() {
+    this.setState(UserStore.getAll());
   },
 
-  getDefaultProps() {
-    return {
-      tasks: []
+  getInitialState() {
+    return UserStore.getAll();
+  },
+
+  componentDidMount() {
+    UserStore.addChangeListener(this._onChange);
+    FeedActions.getFeed();
+  },
+
+  componentWillUnmount() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  renderLastVisit() {
+    if (this.state.user.lastVisit) {
+      return 'Your last visit was: ' + moment(this.state.user.lastVisit).format('MMMM Do YYYY, h:mm:ss a');
+    } else {
+      return '';
     }
   },
 
   render() {
-    let {onAddTask, onClear, tasks} = this.props;
     return (
       <div>
-        <h1>Learn Flux</h1>
-        <RaisedButton label="Default" />
-        <TaskList tasks={tasks} />
-        <button onClick={onAddTask}>Add New</button>
-        <button onClick={onClear}>Clear List</button>
+        <Navigation/>
+          <div className="row">
+            <div className="col-xs">
+              <span>Welcome! {this.renderLastVisit()}</span>
+            </div>
+            <div className="col-xs">
+            </div>
+          </div>
       </div>
     );
   }
