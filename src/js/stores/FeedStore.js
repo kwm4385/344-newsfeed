@@ -4,27 +4,24 @@ import Dispatcher  from '../Dispatcher'
 import BaseStore  from './BaseStore'
 
 // data storage
-let _data = {
-  lastVisit: parseInt(localStorage.getItem('lastVisit'))
-};
+let _data = {};
 
-// Facebook style store creation.
-const UserStore = assign({}, BaseStore, {
-  // public methods used by Controller-View to operate on data
+
+const FeedStore = assign({}, BaseStore, {
   getAll() {
     return _data;
   },
 
-  // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: Dispatcher.register(function handleAction(payload) {
     const action = payload.action;
 
     switch (action.type) {
-      case Constants.ActionTypes.TASK_ADDED:
-
+      case Constants.ActionTypes.FEED_UPDATED:
+        _data[action.feed] = action.items;
+        console.log(_data);
         break;
     }
   })
 });
 
-export default UserStore;
+export default FeedStore;

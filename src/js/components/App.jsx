@@ -1,6 +1,6 @@
 import React  from 'react'
-import FeedActions  from '../actions/FeedActions.js'
 import UserStore  from '../stores/UserStore.js'
+import FeedList  from './FeedList.jsx'
 import Navigation  from './Navigation.jsx'
 
 export default React.createClass({
@@ -10,7 +10,10 @@ export default React.createClass({
   },
 
   getInitialState() {
-    return UserStore.getAll();
+    return {
+      user: UserStore.getAll(),
+      contentClass: ''
+    };
   },
 
   componentDidMount() {
@@ -21,11 +24,25 @@ export default React.createClass({
     UserStore.removeChangeListener(this._onChange);
   },
 
+  navChange(open) {
+    if (open) {
+      this.setState({
+        contentClass: 'nav-open'
+      });
+    } else {
+      this.setState({
+        contentClass: ''
+      });
+    }
+  },
+
   render() {
     return (
       <div>
-        <Navigation user={this.state.user}/>
-
+        <Navigation user={this.state.user} onStateChange={this.navChange} />
+        <div className={"content " + this.state.contentClass}>
+          <FeedList/>
+        </div>
       </div>
     );
   }

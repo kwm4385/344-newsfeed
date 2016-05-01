@@ -1,4 +1,4 @@
-import { AppBar, LeftNav, MenuItem } from 'material-ui'
+import { AppBar, LeftNav, MenuItem, Divider } from 'material-ui'
 import FontIcon  from 'material-ui/lib/font-icon'
 import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
@@ -8,14 +8,16 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      open: true
+      open: false
     };
   },
 
   toggleMenu() {
+    let open = !this.state.open;
     this.setState({
-      open: !this.state.open
+      open: open
     });
+    this.props.onStateChange(open);
   },
 
   renderLastVisit() {
@@ -48,6 +50,7 @@ export default React.createClass({
             <FontIcon className="material-icons menu-icon" color={Colors.grey800}>favorite</FontIcon>
             Favorites
           </MenuItem>
+          <Divider/>
           <MenuItem>Sign In</MenuItem>
         </LeftNav>
       </div>
