@@ -1,5 +1,4 @@
-import { AppBar, LeftNav, MenuItem, Divider } from 'material-ui'
-import FontIcon  from 'material-ui/lib/font-icon'
+import { AppBar, LeftNav, MenuItem, Divider, FontIcon } from 'material-ui'
 import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
 import React  from 'react'

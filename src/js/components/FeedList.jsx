@@ -2,25 +2,28 @@ import React  from 'react'
 import Constants  from '../Constants.js'
 import FeedActions  from '../actions/FeedActions.js'
 import FeedStore  from '../stores/FeedStore.js'
+import StateStore  from '../stores/StateStore.js'
 import Loader  from './Loader.jsx'
 import Stories  from './Stories.jsx'
 
 export default React.createClass({
   _onChange() {
     this.setState({
-      feeds: FeedStore.getAll()
+      feeds: FeedStore.getAll(),
+      feedOptions: StateStore.getAll().activeFeeds
     });
   },
 
   getInitialState() {
     return {
       feeds: FeedStore.getAll(),
-      feedOptions: this.getFeedOptions()
+      feedOptions: StateStore.getAll().activeFeeds
     };
   },
 
   componentWillMount() {
     FeedStore.addChangeListener(this._onChange);
+    StateStore.addChangeListener(this._onChange);
   },
 
   componentDidMount() {
@@ -29,6 +32,7 @@ export default React.createClass({
 
   componentWillUnmount() {
     FeedStore.removeChangeListener(this._onChange);
+    StateStore.removeChangeListener(this._onChange);
   },
 
   refreshFeeds() {
@@ -37,14 +41,6 @@ export default React.createClass({
         FeedActions.getFeed(Constants.FeedTypes[t]);
       }
     });
-  },
-
-  getFeedOptions() {
-    let options = {};
-    _.keys(Constants.FeedTypes).forEach((o) => {
-      options[Constants.FeedTypes[o].display] = true;
-    });
-    return options;
   },
 
   getActiveFeeds() {
