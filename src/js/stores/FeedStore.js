@@ -17,8 +17,8 @@ const FeedStore = assign({}, BaseStore, {
 
     switch (action.type) {
       case Constants.ActionTypes.FEED_UPDATED:
-        _data[action.feed] = action.items;
-        console.log(_data);
+        _data[action.feed.display] = action.items;
+        FeedStore.emitChange();
         break;
     }
   })

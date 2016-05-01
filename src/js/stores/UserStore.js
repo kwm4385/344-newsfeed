@@ -21,7 +21,7 @@ const UserStore = assign({}, BaseStore, {
 
     switch (action.type) {
       case Constants.ActionTypes.TASK_ADDED:
-
+        UserStore.emitChange();
         break;
     }
   })

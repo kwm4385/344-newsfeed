@@ -25,7 +25,7 @@ export default React.createClass({
       return (
         <span>
           Your last visit was:<br/>
-          {moment(this.props.user.lastVisit).format('MMMM Do YYYY, h:mm:ss a')}
+          {moment(this.props.user.lastVisit).format('MMMM Do YYYY, h:mm a')}
         </span>
       );
     } else {
