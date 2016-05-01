@@ -12,5 +12,12 @@ export default {
   ActionSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null
-  })
+  }),
+
+  FeedTypes: {
+    DOMESTIC: {
+      display: 'US News',
+      url: '/feeds/usnews.php'
+    }
+  },
 };

@@ -1,5 +1,6 @@
 import { AppBar, LeftNav, IconButton, IconMenu, MenuItem } from 'material-ui'
 import MoreVertIcon  from 'material-ui/lib/svg-icons/navigation/more-vert'
+import moment  from 'moment'
 import React  from 'react'
 
 export default React.createClass({
@@ -14,6 +15,19 @@ export default React.createClass({
     this.setState({
       open: !this.state.open
     });
+  },
+
+  renderLastVisit() {
+    if (this.props.user.lastVisit) {
+      return (
+        <span>
+          Your last visit was:<br/>
+          {moment(this.props.user.lastVisit).format('MMMM Do YYYY, h:mm:ss a')}
+        </span>
+      );
+    } else {
+      return '';
+    }
   },
 
   render() {
@@ -37,7 +51,9 @@ export default React.createClass({
         <LeftNav
           open={this.state.open}
           style={{'top': '64px'}}>
-          <MenuItem>Menu Item</MenuItem>
+          <div className="nav-userbox">
+            <p className="bottom">{this.renderLastVisit()}</p>
+          </div>
           <MenuItem>Menu Item 2</MenuItem>
         </LeftNav>
       </div>

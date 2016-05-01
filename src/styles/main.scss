@@ -1,19 +1,26 @@
 @import "./normalize.css";
 
-$primary-color: green;
-
 html {
   font-family: Roboto, sans-serif;
 }
 
-h1 {
-  color: $primary-color;
+
+.nav-userbox {
+  margin-left: 0px;
+  height: 30vh;
+  position: relative;
+  background-image: url('/images/bg.jpg');
 }
 
-li.task {
-  list-style-type: none;
+.nav-userbox>p {
+  color: white;
+  font-size: 0.9em;
+  padding: 16px 16px;
+  margin: 0px;
+}
 
-  label {
-    padding: 0 10px;
-  }
+.nav-userbox .bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }

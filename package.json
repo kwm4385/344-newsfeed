@@ -50,6 +50,8 @@
     "object-assign": "^4.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-tap-event-plugin": "^1.0.0",
+    "underscore": "^1.8.3",
+    "x2js": "^2.0.1"
   }
 }
