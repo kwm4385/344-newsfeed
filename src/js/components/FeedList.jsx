@@ -76,7 +76,7 @@ export default React.createClass({
     // console.log(this.state);
     return (
       <div>
-        <div className="story-list">
+        <div>
           {this.renderStories()}
         </div>
       </div>

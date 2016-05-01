@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardText, CardActions, FlatButton } from 'material-ui'
 import moment  from 'moment'
 import React  from 'react'
 
@@ -33,15 +34,36 @@ export default React.createClass({
     });
   },
 
+  strip(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  },
+
   renderCards() {
-    let cards = _.map(this.state.stories, (s) => {
-      return <p>{s.pubDate}</p>
+    let cards = _.map(this.state.stories, (s, k) => {
+      console.log(s);
+      return (
+        <Card className="story" key={k}>
+          <CardHeader
+            title={s.title}
+            subtitle={moment(s.pubDate).format('MMMM Do YYYY, h:mm a')}
+            avatar="/images/logo.jpg"
+          />
+          <CardText>
+            <p>{this.strip(s.description)}</p>
+          </CardText>
+          <CardActions expandable={true}>
+            <FlatButton label="Favorite"/>
+            <FlatButton label="Read More"/>
+          </CardActions>
+        </Card>
+      );
     });
     return cards;
   },
 
   render() {
-    console.log(this.state);
     return (
       <div>{this.renderCards()}</div>
     );
