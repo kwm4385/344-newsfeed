@@ -3,6 +3,7 @@ import Constants  from '../Constants.js'
 import FeedActions  from '../actions/FeedActions.js'
 import FeedStore  from '../stores/FeedStore.js'
 import Loader  from './Loader.jsx'
+import Stories  from './Stories.jsx'
 
 export default React.createClass({
   _onChange() {
@@ -65,14 +66,14 @@ export default React.createClass({
     });
 
     if (stories.length > 0) {
-      return 'Stories';
+      return <Stories active={this.state.feedOptions} feeds={this.state.feeds}/>;
     } else {
       return <p>Nothing to display</p>
     }
   },
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <div className="story-list">

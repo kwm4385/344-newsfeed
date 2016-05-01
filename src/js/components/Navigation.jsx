@@ -37,6 +37,7 @@ export default React.createClass({
     return (
       <div>
         <AppBar
+          className="appBar"
           title="News Feed"
           onLeftIconButtonTouchTap={this.toggleMenu}
         />
