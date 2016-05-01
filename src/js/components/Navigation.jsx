@@ -1,14 +1,26 @@
-import { AppBar, LeftNav, MenuItem, Divider, FontIcon } from 'material-ui'
+import { AppBar, LeftNav, MenuItem, Divider, FontIcon, Toggle } from 'material-ui'
 import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
 import React  from 'react'
+import StateStore  from '../stores/StateStore.js'
 
 export default React.createClass({
 
+  _onChange() {
+    this.setState({
+      feedOptions: StateStore.getAll().activeFeeds
+    });
+  },
+
   getInitialState() {
     return {
-      open: false
+      open: false,
+      feedOptions: StateStore.getAll().activeFeeds
     };
+  },
+
+  componentWillMount() {
+    StateStore.addChangeListener(this._onChange);
   },
 
   toggleMenu() {
@@ -32,6 +44,19 @@ export default React.createClass({
     }
   },
 
+  renderFeedToggles() {
+    return _.map(_.keys(this.state.feedOptions).sort(), (f, i) => {
+      return (
+        <MenuItem className="menu-toggle" key={i}>
+          <Toggle
+            label={f}
+            defaultToggled={this.state.feedOptions[f]}
+          />
+        </MenuItem>
+      );
+    });
+  },
+
   render() {
     return (
       <div>
@@ -47,9 +72,15 @@ export default React.createClass({
             <p className="bottom">{this.renderLastVisit()}</p>
           </div>
           <MenuItem>
+            <FontIcon className="material-icons menu-icon" color={Colors.grey800}>inbox</FontIcon>
+            All Stories
+          </MenuItem>
+          <MenuItem>
             <FontIcon className="material-icons menu-icon" color={Colors.grey800}>favorite</FontIcon>
             Favorites
           </MenuItem>
+          <Divider/>
+          {this.renderFeedToggles()}
           <Divider/>
           <MenuItem>Sign In</MenuItem>
         </LeftNav>

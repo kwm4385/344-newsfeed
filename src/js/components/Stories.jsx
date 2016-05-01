@@ -42,7 +42,7 @@ export default React.createClass({
 
   renderCards() {
     let cards = _.map(this.state.stories, (s, k) => {
-      console.log(s);
+      // console.log(s);
       return (
         <Card className="story" key={k}>
           <CardHeader
