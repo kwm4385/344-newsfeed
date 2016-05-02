@@ -1,16 +1,15 @@
 <?php
-  // echo 'Hello ' . htmlspecialchars($_POST["username"]) . '!';
+$user = $_POST["username"];
+$password = $_POST["password"];
 
-  // $user = $_POST["username"];
-  // $password = $_POST["password"];
-  //
-  // $file = "users.json";
-  //
-  // $json = json_decode(file_get_contents($file));
-  //
-  // $json[$user] = array("user" => user, "password" => password);
-  //
-  // file_put_contents($file, json_encode($json));
-  //
-  // echo 'Success!';
+$file = "users.json";
+
+$json = json_decode(file_get_contents($file), true);
+
+if(!is_null($json[$user]) && $json[$user]['password'] == $password) {
+  http_response_code(200);
+} else {
+  echo 'Invalid username or password';
+  http_response_code(401);
+}
 ?>
