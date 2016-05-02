@@ -1,5 +1,6 @@
 import { AppBar, LeftNav, MenuItem, Divider, FontIcon, Toggle, IconButton, Avatar } from 'material-ui'
 import Colors  from 'material-ui/lib/styles/colors'
+import NavigationMenu  from 'material-ui/lib/svg-icons/navigation/menu'
 import moment  from 'moment'
 import React  from 'react'
 import Constants  from '../Constants'
@@ -37,6 +38,7 @@ export default React.createClass({
   },
 
   toggleMenu() {
+
     let open = !this.state.open;
     this.setState({
       open: open
@@ -138,7 +140,7 @@ export default React.createClass({
         <AppBar
           className="appBar"
           title="Reuters Reader"
-          onLeftIconButtonTouchTap={this.toggleMenu}
+          iconElementLeft={<IconButton onClick={this.toggleMenu}><NavigationMenu /></IconButton>}
           iconElementRight={
             <IconButton iconClassName="material-icons" onClick={this.refreshFeeds}>
               cached
