@@ -1,4 +1,4 @@
-import { AppBar, LeftNav, MenuItem, Divider, FontIcon, Toggle, IconButton } from 'material-ui'
+import { AppBar, LeftNav, MenuItem, Divider, FontIcon, Toggle, IconButton, Avatar } from 'material-ui'
 import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
 import React  from 'react'
@@ -6,7 +6,9 @@ import Constants  from '../Constants'
 import Dispatcher  from '../Dispatcher'
 import FeedActions  from '../actions/FeedActions.js'
 import StateActions  from '../actions/StateActions.js'
+import UserActions  from '../actions/UserActions.js'
 import StateStore  from '../stores/StateStore.js'
+import UserStore  from '../stores/UserStore.js'
 import UserDialog  from './UserDialog.jsx'
 
 export default React.createClass({
@@ -14,7 +16,8 @@ export default React.createClass({
   _onChange() {
     this.setState({
       feedOptions: StateStore.getAll().activeFeeds,
-      viewingFavs: StateStore.getAll().viewingFavs
+      viewingFavs: StateStore.getAll().viewingFavs,
+      user: UserStore.getAll()
     });
   },
 
@@ -23,12 +26,14 @@ export default React.createClass({
       open: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) > 750,
       feedOptions: StateStore.getAll().activeFeeds,
       viewingFavs: StateStore.getAll().viewingFavs,
-      dialogOpen: false
+      dialogOpen: false,
+      user: UserStore.getAll()
     };
   },
 
   componentWillMount() {
     StateStore.addChangeListener(this._onChange);
+    UserStore.addChangeListener(this._onChange);
   },
 
   toggleMenu() {
@@ -50,6 +55,10 @@ export default React.createClass({
     this.setState({
       dialogOpen: true
     });
+  },
+
+  handleLogout() {
+    UserActions.logout();
   },
 
   refreshFeeds() {
@@ -99,6 +108,26 @@ export default React.createClass({
     });
   },
 
+  renderUserAction() {
+    if (this.state.user.loggedIn) {
+      return (
+        <MenuItem onClick={this.handleLogout}>Log Out</MenuItem>
+      );
+    } else {
+      return (
+        <MenuItem onClick={this.handleOpenDialog}>Sign In</MenuItem>
+      );
+    }
+  },
+
+  renderUsername() {
+    if (this.state.user.username) {
+      return (
+        <p><Avatar icon={<FontIcon className="material-icons" color={Colors.grey800}>perm_identity</FontIcon>}/> Welcome {this.state.user.username}</p>
+      );
+    }
+  },
+
   render() {
     const allClassName = !this.state.viewingFavs ? 'menu-active' : '';
     const favsClassName = this.state.viewingFavs ? 'menu-active' : '';
@@ -120,6 +149,7 @@ export default React.createClass({
           open={this.state.open}
           style={{'top': '64px', height:'calc(100% - 64px)'}}>
           <div className="nav-userbox" style={{backgroundImage:"url('images/bg.jpg')"}}>
+            {this.renderUsername()}
             <p className="bottom">{this.renderLastVisit()}</p>
           </div>
           <MenuItem className={allClassName} onClick={this.showAll}>
@@ -133,7 +163,7 @@ export default React.createClass({
           <Divider/>
           {this.renderFeedToggles()}
           <Divider/>
-          <MenuItem onClick={this.handleOpenDialog}>Sign In</MenuItem>
+          {this.renderUserAction()}
         </LeftNav>
       </div>
     );

@@ -5,7 +5,9 @@ import BaseStore  from './BaseStore'
 
 // data storage
 let _data = {
-  lastVisit: parseInt(localStorage.getItem('lastVisit'))
+  lastVisit: parseInt(localStorage.getItem('lastVisit')),
+  loggedIn: false,
+  username: null
 };
 
 // Facebook style store creation.
@@ -20,7 +22,14 @@ const UserStore = assign({}, BaseStore, {
     const action = payload.action;
 
     switch (action.type) {
-      case Constants.ActionTypes.TASK_ADDED:
+      case Constants.ActionTypes.USER_LOGIN:
+        _data.loggedIn = true;
+        _data.username = action.username;
+        UserStore.emitChange();
+        break;
+      case Constants.ActionTypes.USER_LOGOUT:
+        _data.loggedIn = false;
+        _data.username = null;
         UserStore.emitChange();
         break;
     }

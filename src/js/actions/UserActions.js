@@ -8,7 +8,7 @@ export default {
     localStorage.setItem('lastVisit', new Date().getTime())
   },
 
-  create(username, password) {
+  create(username, password, callback) {
     console.log('create', username, password);
     $.ajax({
       type: "POST",
@@ -18,7 +18,13 @@ export default {
         password: password
       },
     }).done((data) => {
-      console.log(data);
+      Dispatcher.handleViewAction({
+        type: Constants.ActionTypes.USER_LOGIN,
+        username: username
+      });
+      callback();
+    }).error((data) => {
+      callback(data.responseText);
     });
   },
 
@@ -35,6 +41,12 @@ export default {
       console.log(data);
     }).error((data) => {
       console.log(data);
+    });
+  },
+
+  logout() {
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.USER_LOGOUT
     });
   }
 };

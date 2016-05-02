@@ -13,6 +13,7 @@
 
     http_response_code(200);
   } else {
+    echo 'User already exists';
     http_response_code(400);
   }
 

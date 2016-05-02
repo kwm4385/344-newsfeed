@@ -13,7 +13,8 @@ export default {
     VIEW_FAVS: null,
     VIEW_ALL: null,
     USER_CREATED: null,
-    USER_LOGIN: null
+    USER_LOGIN: null,
+    USER_LOGOUT: null
   }),
 
   ActionSources: keyMirror({

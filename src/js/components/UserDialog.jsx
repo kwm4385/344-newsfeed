@@ -11,7 +11,9 @@ export default React.createClass({
       password: '',
       createUsername: '',
       createPassword: '',
-      createPasswordConfirm: ''
+      createPasswordConfirm: '',
+      createErrorText: '',
+      loginErrorText: ''
     };
   },
 
@@ -39,7 +41,15 @@ export default React.createClass({
     if (this.state.tab == 0) {
       UserActions.login(this.state.username, this.state.password);
     } else {
-      UserActions.create(this.state.createUsername, this.state.createPassword);
+      UserActions.create(this.state.createUsername, this.state.createPassword, (e) => {
+        if (!e) {
+          this.handleClose();
+        } else {
+          this.setState({
+            createErrorText: e
+          });
+        }
+      });
     }
   },
 
@@ -123,6 +133,7 @@ export default React.createClass({
                     value={this.state.password}
                     onChange={this.hanldeFieldChange}
                   />
+                <p style={{color:'#F44336'}}>{this.state.loginErrorText}</p>
               </div>
             </Tab>
             <Tab label="Create Account" value={1}>
@@ -150,6 +161,7 @@ export default React.createClass({
                     value={this.state.createPasswordConfirm}
                     onChange={this.hanldeFieldChange}
                   />
+                <p style={{color:'#F44336'}}>{this.state.createErrorText}</p>
               </div>
             </Tab>
           </Tabs>
