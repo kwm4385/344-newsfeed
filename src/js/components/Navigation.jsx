@@ -66,8 +66,11 @@ export default React.createClass({
 
   renderFeedToggles() {
     return _.map(_.keys(this.state.feedOptions).sort(), (f, i) => {
+      let color = Constants.FeedTypes[_.find(_.keys(Constants.FeedTypes), (t) => {
+        return Constants.FeedTypes[t].display == f;
+      })].color;
       return (
-        <MenuItem className="menu-toggle" key={i}>
+        <MenuItem className="menu-toggle" key={i} style={{backgroundColor: color}}>
           <Toggle
             label={f}
             defaultToggled={this.state.feedOptions[f]}

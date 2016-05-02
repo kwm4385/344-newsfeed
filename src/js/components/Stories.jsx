@@ -47,7 +47,7 @@ export default React.createClass({
     let cards = _.map(this.state.stories, (s, k) => {
       // console.log(s);
       return (
-        <Card className="story" key={k}>
+        <Card className="story" key={k} style={{borderLeft: '5px solid ' + s.feed.color}}>
           <CardHeader
             className="story-header"
             title={<a className="title-link" href={s.link} target="blank">{s.title}</a>}
