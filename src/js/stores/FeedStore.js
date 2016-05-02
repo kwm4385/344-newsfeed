@@ -12,6 +12,14 @@ const FeedStore = assign({}, BaseStore, {
     return _data;
   },
 
+  getFavs() {
+    let feeds = {};
+    _.keys(_data).forEach((f) => {
+      feeds[f] = _.where(_data[f], {isFavorite: true});
+    });
+    return feeds;
+  },
+
   dispatcherIndex: Dispatcher.register(function handleAction(payload) {
     const action = payload.action;
 

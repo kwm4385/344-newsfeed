@@ -10,14 +10,18 @@ export default React.createClass({
   _onChange() {
     this.setState({
       feeds: FeedStore.getAll(),
-      feedOptions: StateStore.getAll().activeFeeds
+      feedOptions: StateStore.getAll().activeFeeds,
+      viewFavs: StateStore.getAll().viewingFavs,
+      favorites: FeedStore.getFavs()
     });
   },
 
   getInitialState() {
     return {
       feeds: FeedStore.getAll(),
-      feedOptions: StateStore.getAll().activeFeeds
+      feedOptions: StateStore.getAll().activeFeeds,
+      viewFavs: StateStore.getAll().viewingFavs,
+      favorites: FeedStore.getFavs()
     };
   },
 
@@ -50,19 +54,20 @@ export default React.createClass({
   },
 
   renderStories() {
-    if (_.keys(this.state.feeds).length == 0) {
+    let feeds = this.state.viewFavs ? this.state.favorites : this.state.feeds;
+    if (_.keys(feeds).length == 0) {
       return <Loader/>
     }
 
     let stories = [];
-    _.keys(this.state.feeds).forEach((f) => {
+    _.keys(feeds).forEach((f) => {
       if (this.state.feedOptions[f]) {
-        stories = _.union(stories, this.state.feeds[f]);
+        stories = _.union(stories, feeds[f]);
       }
     });
 
     if (stories.length > 0) {
-      return <Stories active={this.state.feedOptions} feeds={this.state.feeds}/>;
+      return <Stories active={this.state.feedOptions} feeds={feeds}/>;
     } else {
       return <p>No stories to display</p>
     }

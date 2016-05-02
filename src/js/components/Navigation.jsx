@@ -12,14 +12,16 @@ export default React.createClass({
 
   _onChange() {
     this.setState({
-      feedOptions: StateStore.getAll().activeFeeds
+      feedOptions: StateStore.getAll().activeFeeds,
+      viewingFavs: StateStore.getAll().viewingFavs
     });
   },
 
   getInitialState() {
     return {
       open: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) > 750,
-      feedOptions: StateStore.getAll().activeFeeds
+      feedOptions: StateStore.getAll().activeFeeds,
+      viewingFavs: StateStore.getAll().viewingFavs
     };
   },
 
@@ -49,6 +51,14 @@ export default React.createClass({
         FeedActions.getFeed(Constants.FeedTypes[t]);
       }
     });
+  },
+
+  showFavs() {
+    StateActions.viewFavs();
+  },
+
+  showAll() {
+    StateActions.viewAll();
   },
 
   renderLastVisit() {
@@ -82,6 +92,9 @@ export default React.createClass({
   },
 
   render() {
+    const allClassName = !this.state.viewingFavs ? 'menu-active' : '';
+    const favsClassName = this.state.viewingFavs ? 'menu-active' : '';
+
     return (
       <div>
         <AppBar
@@ -100,11 +113,11 @@ export default React.createClass({
           <div className="nav-userbox" style={{backgroundImage:"url('images/bg.jpg')"}}>
             <p className="bottom">{this.renderLastVisit()}</p>
           </div>
-          <MenuItem className="menu-active">
+          <MenuItem className={allClassName} onClick={this.showAll}>
             <FontIcon className="material-icons menu-icon" color={Colors.grey800}>inbox</FontIcon>
             All Stories
           </MenuItem>
-          <MenuItem>
+          <MenuItem className={favsClassName} onClick={this.showFavs}>
             <FontIcon className="material-icons menu-icon" color={Colors.grey800}>favorite</FontIcon>
             Favorites
           </MenuItem>

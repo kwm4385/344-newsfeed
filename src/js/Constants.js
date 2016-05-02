@@ -9,7 +9,9 @@ export default {
     FEED_UPDATED: null,
     FEED_TOGGLED: null,
     FEEDS_CLEARED: null,
-    FAVORITE_TOGGLED: null
+    FAVORITE_TOGGLED: null,
+    VIEW_FAVS: null,
+    VIEW_ALL: null
   }),
 
   ActionSources: keyMirror({

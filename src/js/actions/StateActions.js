@@ -10,4 +10,14 @@ export default {
       feed: feed
     });
   },
+  viewFavs() {
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.VIEW_FAVS,
+    });
+  },
+  viewAll() {
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.VIEW_ALL,
+    });
+  },
 };
