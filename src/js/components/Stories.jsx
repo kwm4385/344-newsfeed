@@ -36,9 +36,11 @@ export default React.createClass({
   },
 
   strip(html) {
-    var tmp = document.createElement("div");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
+    // var tmp = document.createElement("div");
+    // tmp.innerHTML = html;
+    // return tmp.textContent || tmp.innerText || "";
+    var regex = /(<([^>]+)>)/ig
+    return html.replace(regex, "");
   },
 
   renderCards() {
