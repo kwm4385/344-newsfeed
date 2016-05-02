@@ -1,4 +1,5 @@
-import { Card, CardHeader, CardText, CardActions, FlatButton } from 'material-ui'
+import { Card, CardHeader, CardText, CardActions, FlatButton, IconButton } from 'material-ui'
+import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
 import React  from 'react'
 
@@ -46,16 +47,18 @@ export default React.createClass({
       return (
         <Card className="story" key={k}>
           <CardHeader
-            title={s.title}
+            title={<a className="title-link" href={s.link} target="blank">{s.title}</a>}
             subtitle={moment(s.pubDate).format('MMMM Do YYYY, h:mm a')}
             avatar="/images/logo.jpg"
           />
           <CardText>
             <p>{this.strip(s.description)}</p>
+            <a href={s.link} target="blank">Read more...</a>
           </CardText>
-          <CardActions expandable={true}>
-            <FlatButton label="Favorite"/>
-            <FlatButton label="Read More"/>
+          <CardActions>
+            <IconButton iconClassName="material-icons" tooltip="Favorite" tooltipPosition="top-center">
+              favorite_border
+            </IconButton>
           </CardActions>
         </Card>
       );
