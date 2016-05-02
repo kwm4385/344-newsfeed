@@ -64,12 +64,11 @@ export default React.createClass({
     if (stories.length > 0) {
       return <Stories active={this.state.feedOptions} feeds={this.state.feeds}/>;
     } else {
-      return <p>Nothing to display</p>
+      return <p>No stories to display</p>
     }
   },
 
   render() {
-    // console.log(this.state);
     return (
       <div>
         <div>

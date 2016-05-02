@@ -35,7 +35,7 @@ export default React.createClass({
   },
 
   strip(html) {
-    var tmp = document.createElement("DIV");
+    var tmp = document.createElement("div");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
   },

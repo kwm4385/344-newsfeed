@@ -4,18 +4,10 @@ import Dispatcher  from '../Dispatcher'
 /* eslint-disable no-console */
 
 export default {
-  addItem(text) {
+  toggleFeed(feed) {
     Dispatcher.handleViewAction({
-      type: Constants.ActionTypes.TASK_ADDED,
-      text: text
+      type: Constants.ActionTypes.FEED_TOGGLED,
+      feed: feed
     });
   },
-
-  clearList() {
-    console.warn('clearList action not yet implemented...');
-  },
-
-  completeTask(task) {
-    console.warn('completeTask action not yet implemented...', task);
-  }
 };

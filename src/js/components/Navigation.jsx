@@ -1,7 +1,10 @@
-import { AppBar, LeftNav, MenuItem, Divider, FontIcon, Toggle } from 'material-ui'
+import { AppBar, LeftNav, MenuItem, Divider, FontIcon, Toggle, IconButton } from 'material-ui'
 import Colors  from 'material-ui/lib/styles/colors'
 import moment  from 'moment'
 import React  from 'react'
+import Constants  from '../Constants'
+import Dispatcher  from '../Dispatcher'
+import FeedActions  from '../actions/FeedActions.js'
 import StateStore  from '../stores/StateStore.js'
 
 export default React.createClass({
@@ -31,6 +34,13 @@ export default React.createClass({
     this.props.onStateChange(open);
   },
 
+  handleFeedToggle(feed) {
+    FeedActions.getFeed(Constants.FeedTypes[_.find(_.keys(Constants.FeedTypes), (k) => {
+      return Constants.FeedTypes[k].display == feed;
+    })]);
+    StateActions.toggleFeed(feed);
+  },
+
   renderLastVisit() {
     if (this.props.user.lastVisit) {
       return (
@@ -51,6 +61,7 @@ export default React.createClass({
           <Toggle
             label={f}
             defaultToggled={this.state.feedOptions[f]}
+            onToggle={() => this.handleFeedToggle(f)}
           />
         </MenuItem>
       );
@@ -64,6 +75,11 @@ export default React.createClass({
           className="appBar"
           title="News Feed"
           onLeftIconButtonTouchTap={this.toggleMenu}
+          iconElementRight={
+            <IconButton iconClassName="material-icons">
+              cached
+            </IconButton>
+          }
         />
         <LeftNav
           open={this.state.open}

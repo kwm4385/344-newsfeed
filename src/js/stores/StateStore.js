@@ -27,7 +27,7 @@ const StateStore = assign({}, BaseStore, {
 
     switch (action.type) {
       case Constants.ActionTypes.FEED_TOGGLED:
-
+        _data.activeFeeds[action.feed] = !_data.activeFeeds[action.feed];
         StateStore.emitChange();
         break;
     }
