@@ -94,7 +94,7 @@ export default React.createClass({
         <LeftNav
           open={this.state.open}
           style={{'top': '64px', height:'calc(100% - 64px)'}}>
-          <div className="nav-userbox">
+          <div className="nav-userbox" style={{backgroundImage:"url('images/bg.jpg')"}}>
             <p className="bottom">{this.renderLastVisit()}</p>
           </div>
           <MenuItem className="menu-active">
