@@ -7,7 +7,8 @@ export default {
   // Each time you add an action, add it here... They should be past-tense
   ActionTypes: keyMirror({
     FEED_UPDATED: null,
-    FEED_TOGGLED: null
+    FEED_TOGGLED: null,
+    FEEDS_CLEARED: null
   }),
 
   ActionSources: keyMirror({

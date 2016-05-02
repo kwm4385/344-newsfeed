@@ -41,6 +41,15 @@ export default React.createClass({
     StateActions.toggleFeed(feed);
   },
 
+  refreshFeeds() {
+    FeedActions.clearFeeds();
+    _.keys(Constants.FeedTypes).forEach((t) => {
+      if (this.state.feedOptions[Constants.FeedTypes[t].display]) {
+        FeedActions.getFeed(Constants.FeedTypes[t]);
+      }
+    });
+  },
+
   renderLastVisit() {
     if (this.props.user.lastVisit) {
       return (
@@ -76,7 +85,7 @@ export default React.createClass({
           title="News Feed"
           onLeftIconButtonTouchTap={this.toggleMenu}
           iconElementRight={
-            <IconButton iconClassName="material-icons">
+            <IconButton iconClassName="material-icons" onClick={this.refreshFeeds}>
               cached
             </IconButton>
           }

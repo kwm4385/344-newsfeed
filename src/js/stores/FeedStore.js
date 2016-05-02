@@ -20,6 +20,10 @@ const FeedStore = assign({}, BaseStore, {
         _data[action.feed.display] = action.items;
         FeedStore.emitChange();
         break;
+      case Constants.ActionTypes.FEEDS_CLEARED:
+        _data = {};
+        FeedStore.emitChange();
+        break;
     }
   })
 });

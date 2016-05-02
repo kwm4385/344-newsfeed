@@ -15,4 +15,10 @@ export default {
       });
     });
   },
+
+  clearFeeds() {
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.FEEDS_CLEARED,
+    });
+  }
 };
