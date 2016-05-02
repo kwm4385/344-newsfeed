@@ -7,6 +7,7 @@ import Dispatcher  from '../Dispatcher'
 import FeedActions  from '../actions/FeedActions.js'
 import StateActions  from '../actions/StateActions.js'
 import StateStore  from '../stores/StateStore.js'
+import UserDialog  from './UserDialog.jsx'
 
 export default React.createClass({
 
@@ -21,7 +22,8 @@ export default React.createClass({
     return {
       open: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) > 750,
       feedOptions: StateStore.getAll().activeFeeds,
-      viewingFavs: StateStore.getAll().viewingFavs
+      viewingFavs: StateStore.getAll().viewingFavs,
+      dialogOpen: false
     };
   },
 
@@ -42,6 +44,12 @@ export default React.createClass({
     //   return Constants.FeedTypes[k].display == feed;
     // })]);
     StateActions.toggleFeed(feed);
+  },
+
+  handleOpenDialog() {
+    this.setState({
+      dialogOpen: true
+    });
   },
 
   refreshFeeds() {
@@ -97,6 +105,7 @@ export default React.createClass({
 
     return (
       <div>
+        <UserDialog open={this.state.dialogOpen}/>
         <AppBar
           className="appBar"
           title="Reuters Reader"
@@ -124,7 +133,7 @@ export default React.createClass({
           <Divider/>
           {this.renderFeedToggles()}
           <Divider/>
-          <MenuItem>Sign In</MenuItem>
+          <MenuItem onClick={this.handleOpenDialog}>Sign In</MenuItem>
         </LeftNav>
       </div>
     );

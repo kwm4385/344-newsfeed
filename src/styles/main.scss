@@ -4,6 +4,15 @@ html {
   font-family: Roboto, sans-serif;
 }
 
+h2 {
+  margin: 0px;
+  padding-top: 24px;
+  color: rgba(0, 0, 0, 0.870588);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
 .appBar {
   position: fixed !important;
   top: 0;
@@ -86,4 +95,13 @@ html {
 .fav-toggle label {
   font-size: 0.8em;
   color: #757575 !important;
+}
+
+.user-model>div>div>div>div {
+  padding: 0 !important;
+  padding-bottom: 10px !important;
+}
+
+.tab-content {
+  padding: 10px 20px;
 }
