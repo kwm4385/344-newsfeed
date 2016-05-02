@@ -18,7 +18,7 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      open: false,
+      open: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) > 750,
       feedOptions: StateStore.getAll().activeFeeds
     };
   },

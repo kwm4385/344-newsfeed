@@ -12,7 +12,7 @@ export default React.createClass({
   getInitialState() {
     return {
       user: UserStore.getAll(),
-      contentClass: ''
+      contentClass: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) > 750 ? 'nav-open' : ''
     };
   },
 
