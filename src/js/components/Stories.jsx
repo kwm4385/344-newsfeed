@@ -47,6 +47,7 @@ export default React.createClass({
       return (
         <Card className="story" key={k}>
           <CardHeader
+            className="story-header"
             title={<a className="title-link" href={s.link} target="blank">{s.title}</a>}
             subtitle={moment(s.pubDate).format('MMMM Do YYYY, h:mm a')}
             avatar="/images/logo.jpg"

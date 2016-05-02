@@ -83,7 +83,7 @@ export default React.createClass({
       <div>
         <AppBar
           className="appBar"
-          title="News Feed"
+          title="Reuters Reader"
           onLeftIconButtonTouchTap={this.toggleMenu}
           iconElementRight={
             <IconButton iconClassName="material-icons" onClick={this.refreshFeeds}>
