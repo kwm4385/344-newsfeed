@@ -36,9 +36,9 @@ export default React.createClass({
   },
 
   handleFeedToggle(feed) {
-    FeedActions.getFeed(Constants.FeedTypes[_.find(_.keys(Constants.FeedTypes), (k) => {
-      return Constants.FeedTypes[k].display == feed;
-    })]);
+    // FeedActions.getFeed(Constants.FeedTypes[_.find(_.keys(Constants.FeedTypes), (k) => {
+    //   return Constants.FeedTypes[k].display == feed;
+    // })]);
     StateActions.toggleFeed(feed);
   },
 
@@ -68,9 +68,9 @@ export default React.createClass({
     return _.map(_.keys(this.state.feedOptions).sort(), (f, i) => {
       let color = Constants.FeedTypes[_.find(_.keys(Constants.FeedTypes), (t) => {
         return Constants.FeedTypes[t].display == f;
-      })].menuColor;
+      })].color;
       return (
-        <MenuItem className="menu-toggle" key={i} style={{backgroundColor: color}}>
+        <MenuItem className="menu-toggle" key={i} style={{borderLeft: '5px solid ' + color}}>
           <Toggle
             label={f}
             defaultToggled={this.state.feedOptions[f]}
