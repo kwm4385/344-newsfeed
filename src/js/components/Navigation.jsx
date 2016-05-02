@@ -133,10 +133,11 @@ export default React.createClass({
   render() {
     const allClassName = !this.state.viewingFavs ? 'menu-active' : '';
     const favsClassName = this.state.viewingFavs ? 'menu-active' : '';
+    const dialog = this.state.user.loggedIn ? null : <UserDialog open={this.state.dialogOpen}/>;
 
     return (
       <div>
-        <UserDialog open={this.state.dialogOpen}/>
+        {dialog}
         <AppBar
           className="appBar"
           title="Reuters Reader"
