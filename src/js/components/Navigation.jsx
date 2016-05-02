@@ -123,7 +123,7 @@ export default React.createClass({
   renderUsername() {
     if (this.state.user.username) {
       return (
-        <p><Avatar icon={<FontIcon className="material-icons" color={Colors.grey800}>perm_identity</FontIcon>}/> Welcome {this.state.user.username}</p>
+        <div className="username"><Avatar icon={<FontIcon className="material-icons" color={Colors.grey800}>perm_identity</FontIcon>}/> Welcome {this.state.user.username}</div>
       );
     }
   },

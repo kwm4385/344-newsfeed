@@ -28,7 +28,7 @@ export default {
     });
   },
 
-  login(username, password) {
+  login(username, password, callback) {
     console.log('login', username, password);
     $.ajax({
       type: "POST",
@@ -38,9 +38,13 @@ export default {
         password: password
       },
     }).done((data) => {
-      console.log(data);
+      Dispatcher.handleViewAction({
+        type: Constants.ActionTypes.USER_LOGIN,
+        username: username
+      });
+      callback();
     }).error((data) => {
-      console.log(data);
+      callback(data.responseText);
     });
   },
 

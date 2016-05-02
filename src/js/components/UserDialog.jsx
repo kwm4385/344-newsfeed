@@ -33,13 +33,23 @@ export default React.createClass({
       password: '',
       createUsername: '',
       createPassword: '',
-      createPasswordConfirm: ''
+      createPasswordConfirm: '',
+      createErrorText: '',
+      loginErrorText: ''
     });
   },
 
   handleSubmit() {
     if (this.state.tab == 0) {
-      UserActions.login(this.state.username, this.state.password);
+      UserActions.login(this.state.username, this.state.password, (e) => {
+        if (!e) {
+          this.handleClose();
+        } else {
+          this.setState({
+            loginErrorText: e
+          });
+        }
+      });
     } else {
       UserActions.create(this.state.createUsername, this.state.createPassword, (e) => {
         if (!e) {
