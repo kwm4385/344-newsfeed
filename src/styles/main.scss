@@ -64,3 +64,12 @@ html {
   height: 48px;
   padding: 12px 0px;
 }
+
+.menu-active {
+  color: #FB8C00 !important;
+  background-color: #F5F5F5;
+}
+
+.menu-active .menu-icon {
+  color: #FB8C00 !important;
+}

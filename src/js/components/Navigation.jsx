@@ -5,6 +5,7 @@ import React  from 'react'
 import Constants  from '../Constants'
 import Dispatcher  from '../Dispatcher'
 import FeedActions  from '../actions/FeedActions.js'
+import StateActions  from '../actions/StateActions.js'
 import StateStore  from '../stores/StateStore.js'
 
 export default React.createClass({
@@ -96,7 +97,7 @@ export default React.createClass({
           <div className="nav-userbox">
             <p className="bottom">{this.renderLastVisit()}</p>
           </div>
-          <MenuItem>
+          <MenuItem className="menu-active">
             <FontIcon className="material-icons menu-icon" color={Colors.grey800}>inbox</FontIcon>
             All Stories
           </MenuItem>

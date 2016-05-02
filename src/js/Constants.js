@@ -46,4 +46,8 @@ export default {
       url: '/feeds/world.php'
     },
   },
+
+  FeedColors: {
+    
+  }
 };
