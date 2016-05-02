@@ -1,5 +1,6 @@
 import { Dialog, FlatButton, Tabs, Tab, TextField } from 'material-ui'
 import React  from 'react'
+import UserActions  from '../actions/UserActions.js'
 
 export default React.createClass({
   getInitialState() {
@@ -34,10 +35,20 @@ export default React.createClass({
     });
   },
 
+  handleSubmit() {
+    if (this.state.tab == 0) {
+      UserActions.login(this.state.username, this.state.password);
+    } else {
+      UserActions.create(this.state.createUsername, this.state.createPassword);
+    }
+  },
+
   handleTabChange(t) {
-    this.setState({
-      tab: t
-    });
+    if (t == 0 || t == 1) {
+      this.setState({
+        tab: t
+      });
+    }
   },
 
   hanldeFieldChange(e) {
@@ -46,21 +57,46 @@ export default React.createClass({
     this.setState(s);
   },
 
+  isValid() {
+    if (this.state.tab == 0) {
+      return this.state.username.length > 0 && this.state.password.length > 0;
+    } else {
+      return this.state.createUsername.length > 0
+          && this.state.createPassword.length > 0
+          && this.state.createPasswordConfirm == this.state.createPassword;
+    }
+  },
+
   render() {
     const actions = [
       <FlatButton
         label="Cancel"
         secondary={true}
         onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />,
+      />
     ];
-    console.log(this.state);
+
+    if (this.isValid()) {
+      actions.push(
+        <FlatButton
+          label="Submit"
+          primary={true}
+          keyboardFocused={true}
+          onTouchTap={this.handleSubmit}
+        />
+      );
+    } else {
+      actions.push(
+        <FlatButton
+          label="Submit"
+          primary={true}
+          keyboardFocused={true}
+          onTouchTap={this.handleSubmit}
+          disabled
+        />
+      );
+    }
+
     return (
       <Dialog
           className="user-model"
@@ -69,7 +105,7 @@ export default React.createClass({
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          <Tabs onChange={this.handleTabChange}>
+          <Tabs value={this.state.tab} onChange={this.handleTabChange}>
             <Tab label="Sign In" value={0}>
               <div className="tab-content">
                 <h2>Sign In</h2>
@@ -83,6 +119,7 @@ export default React.createClass({
                   <TextField
                     floatingLabelText="Password"
                     name="password"
+                    type='password'
                     value={this.state.password}
                     onChange={this.hanldeFieldChange}
                   />
@@ -101,6 +138,7 @@ export default React.createClass({
                   <TextField
                     floatingLabelText="Password"
                     name="createPassword"
+                    type='password'
                     value={this.state.createPassword}
                     onChange={this.hanldeFieldChange}
                   />
@@ -108,6 +146,7 @@ export default React.createClass({
                   <TextField
                     floatingLabelText="Confirm Password"
                     name="createPasswordConfirm"
+                    type='password'
                     value={this.state.createPasswordConfirm}
                     onChange={this.hanldeFieldChange}
                   />

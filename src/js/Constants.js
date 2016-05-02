@@ -11,7 +11,9 @@ export default {
     FEEDS_CLEARED: null,
     FAVORITE_TOGGLED: null,
     VIEW_FAVS: null,
-    VIEW_ALL: null
+    VIEW_ALL: null,
+    USER_CREATED: null,
+    USER_LOGIN: null
   }),
 
   ActionSources: keyMirror({
