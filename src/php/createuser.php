@@ -1,4 +1,5 @@
 <?php
+  // ini_set('display_errors', 1);
   $user = $_POST["username"];
   $password = $_POST["password"];
 
@@ -11,10 +12,10 @@
 
     file_put_contents($file, json_encode($json));
 
-    http_response_code(200);
+    header('X-PHP-Response-Code: 200', true, 200);
   } else {
     echo 'User already exists';
-    http_response_code(400);
+    header('X-PHP-Response-Code: 400', true, 400);
   }
 
 ?>

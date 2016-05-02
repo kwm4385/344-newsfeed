@@ -43,7 +43,7 @@ export default React.createClass({
     if (this.state.tab == 0) {
       UserActions.login(this.state.username, this.state.password, (e) => {
         if (!e) {
-          this.handleClose();
+          // this.handleClose();
         } else {
           this.setState({
             loginErrorText: e
@@ -53,7 +53,7 @@ export default React.createClass({
     } else {
       UserActions.create(this.state.createUsername, this.state.createPassword, (e) => {
         if (!e) {
-          this.handleClose();
+          // this.handleClose();
         } else {
           this.setState({
             createErrorText: e

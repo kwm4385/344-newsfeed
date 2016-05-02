@@ -9,7 +9,6 @@ export default {
   },
 
   create(username, password, callback) {
-    console.log('create', username, password);
     $.ajax({
       type: "POST",
       url: 'createuser.php',
@@ -29,7 +28,6 @@ export default {
   },
 
   login(username, password, callback) {
-    console.log('login', username, password);
     $.ajax({
       type: "POST",
       url: 'login.php',
