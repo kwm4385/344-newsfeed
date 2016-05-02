@@ -8,7 +8,8 @@ export default {
   ActionTypes: keyMirror({
     FEED_UPDATED: null,
     FEED_TOGGLED: null,
-    FEEDS_CLEARED: null
+    FEEDS_CLEARED: null,
+    FAVORITE_TOGGLED: null
   }),
 
   ActionSources: keyMirror({
@@ -23,12 +24,12 @@ export default {
       menuColor: 'rgba(244, 67, 54, 0.4)',
       color: 'rgba(244, 67, 54, 1)'
     },
-    ARTS: {
-      display: 'Arts and Culture',
-      url: 'feeds/arts.php',
-      menuColor: 'rgba(103, 58, 183, 0.4)',
-      color: 'rgba(103, 58, 183, 1)'
-    },
+    // ARTS: {
+    //   display: 'Arts and Culture',
+    //   url: 'feeds/arts.php',
+    //   menuColor: 'rgba(103, 58, 183, 0.4)',
+    //   color: 'rgba(103, 58, 183, 1)'
+    // },
     BUSINESS: {
       display: 'Business',
       url: 'feeds/business.php',

@@ -20,5 +20,12 @@ export default {
     Dispatcher.handleViewAction({
       type: Constants.ActionTypes.FEEDS_CLEARED,
     });
+  },
+
+  toggleFavoriteStory(story) {
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.FAVORITE_TOGGLED,
+      story: story
+    });
   }
 };

@@ -21,10 +21,19 @@ const FeedStore = assign({}, BaseStore, {
           i.feed = action.feed;
         });
         _data[action.feed.display] = action.items;
+        _data[action.feed.display].forEach((s) => {
+          s.isFavorite = false;
+        });
         FeedStore.emitChange();
         break;
       case Constants.ActionTypes.FEEDS_CLEARED:
         _data = {};
+        FeedStore.emitChange();
+        break;
+      case Constants.ActionTypes.FAVORITE_TOGGLED:
+        let story = action.story;
+        _.find(_data[story.feed.display], (s) => {return s == story;}).isFavorite =
+          !_.find(_data[story.feed.display], (s) => {return s == story;}).isFavorite;
         FeedStore.emitChange();
         break;
     }

@@ -1,7 +1,10 @@
-import { Card, CardHeader, CardText, CardActions, FlatButton, IconButton } from 'material-ui'
+import { Card, CardHeader, CardText, CardActions, FlatButton, Checkbox } from 'material-ui'
 import Colors  from 'material-ui/lib/styles/colors'
+import ActionFavorite  from 'material-ui/lib/svg-icons/action/favorite'
+import ActionFavoriteBorder  from 'material-ui/lib/svg-icons/action/favorite-border'
 import moment  from 'moment'
 import React  from 'react'
+import FeedActions  from '../actions/FeedActions.js'
 
 export default React.createClass({
   getInitialState() {
@@ -35,6 +38,10 @@ export default React.createClass({
     });
   },
 
+  handleToggleFavorite(story) {
+    FeedActions.toggleFavoriteStory(story);
+  },
+
   strip(html) {
     // var tmp = document.createElement("div");
     // tmp.innerHTML = html;
@@ -59,9 +66,14 @@ export default React.createClass({
             <a href={s.link} target="blank">Read more...</a>
           </CardText>
           <CardActions>
-            <IconButton iconClassName="material-icons" tooltip="Favorite" tooltipPosition="top-center">
-              favorite_border
-            </IconButton>
+            <Checkbox
+              className="fav-toggle"
+              label="Favorite"
+              onCheck={() => this.handleToggleFavorite(s)}
+              defaultChecked={s.isFavorite}
+              checkedIcon={<ActionFavorite />}
+              unCheckedIcon={<ActionFavoriteBorder />}
+            />
           </CardActions>
         </Card>
       );
