@@ -19,35 +19,35 @@ export default {
   FeedTypes: {
     DOMESTIC: {
       display: 'US News',
-      url: '/feeds/usnews.php'
+      url: 'feeds/usnews.php'
     },
     ARTS: {
       display: 'Arts and Culture',
-      url: '/feeds/arts.php'
+      url: 'feeds/arts.php'
     },
     BUSINESS: {
       display: 'Business',
-      url: '/feeds/business.php'
+      url: 'feeds/business.php'
     },
     Entertainment: {
       display: 'Entertainment',
-      url: '/feeds/entertainment.php'
+      url: 'feeds/entertainment.php'
     },
     SPORTS: {
       display: 'Sports',
-      url: '/feeds/sports.php'
+      url: 'feeds/sports.php'
     },
     TECHNOLOGY: {
       display: 'Technology',
-      url: '/feeds/usnews.php'
+      url: 'feeds/usnews.php'
     },
     WORLD: {
       display: 'World News',
-      url: '/feeds/world.php'
+      url: 'feeds/world.php'
     },
   },
 
   FeedColors: {
-    
+
   }
 };
